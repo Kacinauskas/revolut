@@ -37,7 +37,7 @@ public class AccountDao implements Dao<CompletableFuture<Account>, String> {
         });
     }
 
-    public void save(Account remitterAccount, Account beneficiaryAccount) {
+    public void update(Account remitterAccount, Account beneficiaryAccount) {
         Session session = SessionUtil.getSession().openSession();
         Transaction transaction = session.beginTransaction();
 

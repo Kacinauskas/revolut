@@ -64,7 +64,7 @@ public class TransferService {
             remitterAccount.getTransfers().add(remitterTransfer);
             beneficiaryAccount.getTransfers().add(beneficiaryTransfer);
 
-            accountDao.save(remitterAccount, beneficiaryAccount);
+            accountDao.update(remitterAccount, beneficiaryAccount);
 
             return remitterTransfer;
         }

@@ -3,7 +3,7 @@ package com.laurynas.kacinauskas.revolut.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class BeneficiaryDTO {
+public class BeneficiaryDto {
 
     @NotBlank
     @Size(max = 50)

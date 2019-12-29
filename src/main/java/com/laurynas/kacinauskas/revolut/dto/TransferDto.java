@@ -5,13 +5,13 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-public class TransferDTO {
+public class TransferDto {
 
     @Valid
-    private RemitterDTO remitter;
+    private RemitterDto remitter;
 
     @Valid
-    private BeneficiaryDTO beneficiary;
+    private BeneficiaryDto beneficiary;
 
     @Min(value = 0)
     private Double amount;
@@ -20,19 +20,19 @@ public class TransferDTO {
     @Size(min = 5, max = 100)
     private String details;
 
-    public RemitterDTO getRemitter() {
+    public RemitterDto getRemitter() {
         return remitter;
     }
 
-    public void setRemitter(RemitterDTO remitter) {
+    public void setRemitter(RemitterDto remitter) {
         this.remitter = remitter;
     }
 
-    public BeneficiaryDTO getBeneficiary() {
+    public BeneficiaryDto getBeneficiary() {
         return beneficiary;
     }
 
-    public void setBeneficiary(BeneficiaryDTO beneficiary) {
+    public void setBeneficiary(BeneficiaryDto beneficiary) {
         this.beneficiary = beneficiary;
     }
 

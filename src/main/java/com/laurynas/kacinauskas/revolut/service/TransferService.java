@@ -5,7 +5,7 @@ import com.laurynas.kacinauskas.revolut.dao.CustomerDao;
 import com.laurynas.kacinauskas.revolut.domain.Account;
 import com.laurynas.kacinauskas.revolut.domain.Customer;
 import com.laurynas.kacinauskas.revolut.domain.Transfer;
-import com.laurynas.kacinauskas.revolut.dto.TransferDTO;
+import com.laurynas.kacinauskas.revolut.dto.TransferDto;
 import com.laurynas.kacinauskas.revolut.exception.ErrorCode;
 import com.laurynas.kacinauskas.revolut.exception.GeneralValidationException;
 
@@ -25,7 +25,7 @@ public class TransferService {
         this.accountDao = accountDao;
     }
 
-    public Transfer doTransfer(final TransferDTO transferDTO) {
+    public Transfer doTransfer(final TransferDto transferDTO) {
         CompletableFuture<Customer> remitterFuture = customerDao.getById(transferDTO.getRemitter().getId());
 
         CompletableFuture<Account> beneficiaryAccountFuture = accountDao

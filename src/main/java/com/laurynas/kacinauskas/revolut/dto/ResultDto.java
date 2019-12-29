@@ -1,13 +1,13 @@
 package com.laurynas.kacinauskas.revolut.dto;
 
-public class ResultDTO<T> {
+public class ResultDto<T> {
 
     private T result;
 
-    public ResultDTO() {
+    public ResultDto() {
     }
 
-    public ResultDTO(T result) {
+    public ResultDto(T result) {
         this.result = result;
     }
 

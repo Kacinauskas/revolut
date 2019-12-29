@@ -5,7 +5,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class RemitterDTO {
+public class RemitterDto {
 
     @NotNull
     @Min(value = 1)

@@ -1,8 +1,8 @@
 package com.laurynas.kacinauskas.revolut.controller;
 
 import com.laurynas.kacinauskas.revolut.domain.Transfer;
-import com.laurynas.kacinauskas.revolut.dto.ResultDTO;
-import com.laurynas.kacinauskas.revolut.dto.TransferDTO;
+import com.laurynas.kacinauskas.revolut.dto.ResultDto;
+import com.laurynas.kacinauskas.revolut.dto.TransferDto;
 import com.laurynas.kacinauskas.revolut.exception.ErrorCode;
 import com.laurynas.kacinauskas.revolut.exception.GeneralError;
 import com.laurynas.kacinauskas.revolut.exception.GeneralValidationException;
@@ -25,7 +25,7 @@ public class TransferController {
         Transfer transfer;
 
         try {
-            TransferDTO transferDTO = getTransformer().fromJson(request.body(), TransferDTO.class);
+            TransferDto transferDTO = getTransformer().fromJson(request.body(), TransferDto.class);
             if (!RequestValidator.getValidator().validate(transferDTO).isEmpty()) {
                 response.status(HttpStatus.BAD_REQUEST_400);
                 return getTransformer().toJson(new GeneralError(ErrorCode.BAD_REQUEST.toString()));
@@ -42,7 +42,7 @@ public class TransferController {
         }
 
         response.status(HttpStatus.CREATED_201);
-        return getTransformer().toJson(new ResultDTO<>(transfer.getId().toString()));
+        return getTransformer().toJson(new ResultDto<>(transfer.getId().toString()));
     }
 
 }

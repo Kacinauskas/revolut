@@ -2,8 +2,8 @@ package com.laurynas.kacinauskas.revolut.exception;
 
 public class GeneralValidationException extends RuntimeException {
 
-    public GeneralValidationException(ExceptionCode exceptionCode) {
-        super(exceptionCode.toString());
+    public GeneralValidationException(ErrorCode errorCode) {
+        super(errorCode.toString());
     }
 
 }

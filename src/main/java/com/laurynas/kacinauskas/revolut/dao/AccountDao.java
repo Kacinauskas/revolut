@@ -1,7 +1,7 @@
 package com.laurynas.kacinauskas.revolut.dao;
 
 import com.laurynas.kacinauskas.revolut.domain.Account;
-import com.laurynas.kacinauskas.revolut.exception.ExceptionCode;
+import com.laurynas.kacinauskas.revolut.exception.ErrorCode;
 import com.laurynas.kacinauskas.revolut.exception.GeneralValidationException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -31,7 +31,7 @@ public class AccountDao implements Dao<CompletableFuture<Account>, String> {
             }
 
             return Optional.ofNullable(account)
-                    .orElseThrow(() -> new GeneralValidationException(ExceptionCode.ACCOUNT_NOT_FOUND));
+                    .orElseThrow(() -> new GeneralValidationException(ErrorCode.ACCOUNT_NOT_FOUND));
         });
     }
 

@@ -1,7 +1,7 @@
 package com.laurynas.kacinauskas.revolut.dao;
 
 import com.laurynas.kacinauskas.revolut.domain.Customer;
-import com.laurynas.kacinauskas.revolut.exception.ExceptionCode;
+import com.laurynas.kacinauskas.revolut.exception.ErrorCode;
 import com.laurynas.kacinauskas.revolut.exception.GeneralValidationException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -31,7 +31,7 @@ public class CustomerDao implements Dao<CompletableFuture<Customer>, Long> {
             }
 
             return Optional.ofNullable(customer)
-                    .orElseThrow(() -> new GeneralValidationException(ExceptionCode.CUSTOMER_NOT_FOUND));
+                    .orElseThrow(() -> new GeneralValidationException(ErrorCode.CUSTOMER_NOT_FOUND));
         });
     }
 

@@ -1,8 +1,18 @@
 package com.laurynas.kacinauskas.revolut.dto;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class RemitterDTO {
 
+    @NotNull
+    @Min(value = 1)
     private Long id;
+
+    @NotBlank()
+    @Size(min = 10, max = 10)
     private String accountId;
 
     public Long getId() {

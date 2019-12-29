@@ -1,4 +1,4 @@
-package com.laurynas.kacinauskas.revolut.configuration;
+package com.laurynas.kacinauskas.revolut.util;
 
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;

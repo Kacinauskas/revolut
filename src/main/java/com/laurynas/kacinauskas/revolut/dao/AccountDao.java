@@ -6,9 +6,11 @@ import com.laurynas.kacinauskas.revolut.exception.GeneralValidationException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.inject.Singleton;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
+@Singleton
 public class AccountDao implements Dao<CompletableFuture<Account>, String> {
 
     @Override
@@ -22,7 +24,7 @@ public class AccountDao implements Dao<CompletableFuture<Account>, String> {
                 account = session.get(Account.class, id);
                 transaction.commit();
             } catch (Exception e) {
-                // TODO: add logging
+                // TODO: add logging and proper handling
                 transaction.rollback();
             } finally {
                 if (session.isOpen()) {
@@ -35,7 +37,7 @@ public class AccountDao implements Dao<CompletableFuture<Account>, String> {
         });
     }
 
-    public Account save(Account remitterAccount, Account beneficiaryAccount) {
+    public void save(Account remitterAccount, Account beneficiaryAccount) {
         Session session = SessionUtil.getSession().openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -44,14 +46,13 @@ public class AccountDao implements Dao<CompletableFuture<Account>, String> {
             session.saveOrUpdate(beneficiaryAccount);
             transaction.commit();
         } catch (Exception e) {
+            // TODO: add logging and proper handling
             transaction.rollback();
         } finally {
             if (session.isOpen()) {
                 session.close();
             }
         }
-
-        return remitterAccount;
     }
 
 }

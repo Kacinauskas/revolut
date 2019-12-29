@@ -1,4 +1,4 @@
-package com.laurynas.kacinauskas.revolut.configuration;
+package com.laurynas.kacinauskas.revolut.util;
 
 import javax.validation.Validation;
 import javax.validation.Validator;

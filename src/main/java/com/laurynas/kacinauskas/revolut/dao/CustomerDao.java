@@ -6,9 +6,11 @@ import com.laurynas.kacinauskas.revolut.exception.GeneralValidationException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import javax.inject.Singleton;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
+@Singleton
 public class CustomerDao implements Dao<CompletableFuture<Customer>, Long> {
 
     @Override

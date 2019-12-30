@@ -4,7 +4,6 @@ import com.laurynas.kacinauskas.revolut.domain.Transfer;
 import com.laurynas.kacinauskas.revolut.dto.ResultDto;
 import com.laurynas.kacinauskas.revolut.dto.TransferDto;
 import com.laurynas.kacinauskas.revolut.exception.ErrorCode;
-import com.laurynas.kacinauskas.revolut.exception.GeneralError;
 import com.laurynas.kacinauskas.revolut.exception.GeneralValidationException;
 import com.laurynas.kacinauskas.revolut.service.TransferService;
 import com.laurynas.kacinauskas.revolut.util.RequestValidator;
@@ -21,25 +20,13 @@ public class TransferController {
     }
 
     public static String makeTransfer(Request request, Response response) {
-        response.type("application/json");
-        Transfer transfer;
+        TransferDto transferDTO = getTransformer().fromJson(request.body(), TransferDto.class);
 
-        try {
-            TransferDto transferDTO = getTransformer().fromJson(request.body(), TransferDto.class);
-            if (!RequestValidator.getValidator().validate(transferDTO).isEmpty()) {
-                response.status(HttpStatus.BAD_REQUEST_400);
-                return getTransformer().toJson(new GeneralError(ErrorCode.BAD_REQUEST.toString()));
-            }
-
-            transfer = getInstance(TransferService.class).doTransfer(transferDTO);
-        } catch (Exception e) {
-            if (e.getCause() instanceof GeneralValidationException) {
-                response.status(HttpStatus.BAD_REQUEST_400);
-                return getTransformer().toJson(new GeneralError(e.getCause().getMessage()));
-            }
-            response.status(HttpStatus.INTERNAL_SERVER_ERROR_500);
-            return "";
+        if (!RequestValidator.getValidator().validate(transferDTO).isEmpty()) {
+            throw new GeneralValidationException(ErrorCode.BAD_REQUEST);
         }
+
+        Transfer transfer = getInstance(TransferService.class).doTransfer(transferDTO);
 
         response.status(HttpStatus.CREATED_201);
         return getTransformer().toJson(new ResultDto<>(transfer.getId().toString()));

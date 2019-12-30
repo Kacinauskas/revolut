@@ -1,9 +1,10 @@
 package com.laurynas.kacinauskas.revolut;
 
 import com.laurynas.kacinauskas.revolut.controller.TransferController;
+import com.laurynas.kacinauskas.revolut.exception.ExceptionHandler;
 import org.flywaydb.core.Flyway;
 
-import static spark.Spark.post;
+import static spark.Spark.*;
 
 public class RevolutApplication {
 
@@ -13,7 +14,11 @@ public class RevolutApplication {
     public static void main(String[] args) {
         setupDBMigration();
 
+        before((request, response) -> response.type("application/json"));
+
         post(API_VERSION_RESOURCE.concat(TRANSFER_RESOURCE), TransferController::makeTransfer);
+
+        exception(Exception.class, (exception, request, response) -> ExceptionHandler.handle(exception, response));
     }
 
     private static void setupDBMigration() {

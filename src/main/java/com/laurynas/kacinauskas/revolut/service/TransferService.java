@@ -54,6 +54,7 @@ public class TransferService {
     private Transfer makeTransferIfBalanceSufficient(Account remitterAccount, Account beneficiaryAccount,
                                                      Double amount, String details) {
         if (remitterAccount.getBalance() >= amount) {
+            // TODO: check if this can be optimised to just 1 transfer
             Transfer remitterTransfer = new Transfer(beneficiaryAccount.getCustomer(), remitterAccount.getCustomer(),
                     amount, details, remitterAccount);
             Transfer beneficiaryTransfer = new Transfer(beneficiaryAccount.getCustomer(), remitterAccount.getCustomer(),

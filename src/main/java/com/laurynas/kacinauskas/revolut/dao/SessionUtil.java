@@ -5,8 +5,12 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 class SessionUtil {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SessionUtil.class);
 
     private SessionUtil() {
     }
@@ -30,7 +34,7 @@ class SessionUtil {
 
             sessionFactory = metadata.getSessionFactoryBuilder().build();
         } catch (Exception e) {
-            // TODO: add logging
+            LOG.error("Could not initiate session factory: ", e);
             if (standardServiceRegistry != null) {
                 StandardServiceRegistryBuilder.destroy(standardServiceRegistry);
             }

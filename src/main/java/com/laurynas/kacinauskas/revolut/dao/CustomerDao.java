@@ -5,6 +5,8 @@ import com.laurynas.kacinauskas.revolut.exception.ErrorCode;
 import com.laurynas.kacinauskas.revolut.exception.GeneralValidationException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Singleton;
 import java.util.Optional;
@@ -12,6 +14,8 @@ import java.util.concurrent.CompletableFuture;
 
 @Singleton
 public class CustomerDao implements Dao<CompletableFuture<Customer>, Long> {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerDao.class);
 
     @Override
     public CompletableFuture<Customer> getById(Long id) {
@@ -24,7 +28,7 @@ public class CustomerDao implements Dao<CompletableFuture<Customer>, Long> {
                 customer = session.get(Customer.class, id);
                 transaction.commit();
             } catch (Exception e) {
-                // TODO: add logging
+                LOG.error("Could not get customer by id: ", e);
                 transaction.rollback();
             } finally {
                 if (session.isOpen()) {

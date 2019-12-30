@@ -227,7 +227,17 @@ class TransferServiceSpec extends Specification {
         then: "getting beneficiary's details"
             1 * accountDao.getById("1357924688") >> beneficiaryAccountFuture
         then: "updating remitter's and beneficiary's account"
-            1 * accountDao.update(_, _)
+            1 * accountDao.update(
+                    {
+                        Account remiAccount ->
+                        remiAccount.getId() == "1234567890" &&
+                        remiAccount.getBalance() == 3000L
+                    } as Account,
+                    {
+                        Account beneAccount ->
+                        beneAccount.getId() == "1357924688" &&
+                        beneAccount.getBalance() == 2100L
+                    } as Account)
         and: "evaluating result"
             result.getRemitter() == remitter
             result.getBeneficiary() == beneficiary
